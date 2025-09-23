@@ -1,0 +1,10 @@
+FROM python:3.12-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+COPY . .
+
+CMD ["bash", "-c", "python excel_to_csv.py && python data_transform.py && python migration_to_mongoDB.py"]

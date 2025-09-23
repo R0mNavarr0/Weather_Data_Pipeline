@@ -1,0 +1,24 @@
+services:
+  mongo:
+    image: mongo:8.0
+    container_name: mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpsw
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongo_data:/data/db
+
+  etl:
+    build:
+      context: .
+      dockerfile: Dockerfile.etl
+    container_name: etl
+    depends_on:
+      - mongo
+    environment:
+      MONGO_URI: "mongodb://root:rootpsw@mongo:27017/greenandcoop?authSource=admin"
+    volumes:
+      - .:/app

@@ -1,0 +1,5 @@
+boto3==1.34.106
+pandas==2.2.2
+numpy==1.26.4
+python-dotenv==1.0.1
+pymongo==4.7.3
