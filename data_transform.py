@@ -1,5 +1,5 @@
 # --------- Importation des packages ----------
-import os, io, gzip, boto3, pandas as pd, numpy as np
+import os, io, gzip, boto3, pandas as pd, numpy as np, json
 from dotenv import load_dotenv
 
 # --------- Chargement des variables d'environnement ----------
@@ -7,6 +7,8 @@ from dotenv import load_dotenv
 load_dotenv()
 AWS_REGION = os.getenv("AWS_REGION")
 S3_BUCKET  = os.getenv("S3_BUCKET_STAGING")
+S3_BUCKET_RDY = os.getenv("S3_BUCKET_RDY")
+OUT_KEY = os.getenv("OUT_KEY")
 
 # --------- Connexion au bucket S3 ----------
 
@@ -151,6 +153,17 @@ def to_mongo_records(df: pd.DataFrame):
         for k, v in rec.items():
             if pd.isna(v):
                 rec[k] = None
+            elif isinstance(v, (pd.Timestamp, np.datetime64)):
+                rec[k] = str(v)
         yield rec
 
 mongo_ready = list(to_mongo_records(df_final))
+
+with io.BytesIO() as buffer:
+    for rec in mongo_ready:
+        line = json.dumps(rec, ensure_ascii=False) + "\n"
+        buffer.write(line.encode("utf-8"))
+    buffer.seek(0)
+    s3.upload_fileobj(buffer, S3_BUCKET_RDY, OUT_KEY)
+
+print(f"✅ Données prêtes pour MongoDB sauvegardées dans s3://{S3_BUCKET_RDY}/{OUT_KEY}")
