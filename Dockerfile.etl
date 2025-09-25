@@ -7,4 +7,4 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-CMD ["bash", "-c", "python excel_to_csv.py && python data_transform.py && python migration_to_mongoDB.py"]
+CMD ["bash", "-c", "python excel_to_csv.py && python data_transform.py && python migration_to_mongoDB.py && python check_quality_migration.py | tee /app/etl.log"]
