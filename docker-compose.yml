@@ -12,8 +12,9 @@ services:
       - ./mongo_data:/data/db
 
   etl:
+    image: etl:latest
     build:
-      context: .
+      context: ./etl
       dockerfile: Dockerfile.etl
     container_name: etl
     depends_on:
