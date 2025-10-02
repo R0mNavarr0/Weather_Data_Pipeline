@@ -166,4 +166,4 @@ with io.BytesIO() as buffer:
     buffer.seek(0)
     s3.upload_fileobj(buffer, S3_BUCKET_RDY, OUT_KEY)
 
-print(f"✅ Données prêtes pour MongoDB sauvegardées dans s3://{S3_BUCKET_RDY}/{OUT_KEY}")
+print(f"Données prêtes pour MongoDB sauvegardées dans s3://{S3_BUCKET_RDY}/{OUT_KEY}")

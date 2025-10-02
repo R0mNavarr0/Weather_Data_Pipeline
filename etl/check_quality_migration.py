@@ -57,7 +57,7 @@ comparison["diff"] = comparison["mongo_null_rate"] - comparison["src_null_rate"]
 field_error_rate = comparison["diff"].abs().sum() / (len(df_src.columns)) if expected > 0 else 0
 print(f"Taux d'erreur (complétude champs) : {field_error_rate:.2%}")
 
-# --- Vérification valeurs numériques (stats simples) ---
+# --- Vérification valeurs numériques ---
 num_cols = [c for c in df_src.columns if pd.api.types.is_numeric_dtype(df_src[c])]
 for col in num_cols:
     try:
