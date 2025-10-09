@@ -12,7 +12,7 @@ Conçu pour le projet Forecast 2.0 chez GreenAndCoop.
 
 ## Schéma d’architecture
 
-![Pipeline météo – GreenAndCoop](logigramme.png)
+![Pipeline météo – GreenAndCoop](logigramme.PNG)
 
 ## Structure du repo
 
