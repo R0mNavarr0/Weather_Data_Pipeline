@@ -10,19 +10,9 @@ Conçu pour le projet Forecast 2.0 chez GreenAndCoop.
 * Charger dans MongoDB et vérifier la qualité post-migration.
 * Mesurer la latence d’accès pour l’exploitation DS.
 
-## Architecture
+## Schéma d’architecture
 
-```
-[S3 raw/staging/ready] -> ETL Docker (pandas/boto3) -> S3 ready (.jsonl)
-                                         |
-                                         v
-                                     MongoDB (Docker ou EC2)
-                                         |
-                                         v
-                          Checks qualité + métriques CloudWatch
-```
-
-L’infra cloud reprend l’EC2 + agent CloudWatch + ECR indiqués dans la présentation. 
+![Pipeline météo – GreenAndCoop](logigramme.png)
 
 ## Structure du repo
 
