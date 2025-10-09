@@ -1,7 +1,3 @@
-Voici un **README.md** prêt à déposer à la racine du dépôt.
-
----
-
 # Weather Data Pipeline – GreenAndCoop
 
 Pipeline de données météo de bout en bout pour alimenter une base **MongoDB** à partir de sources hétérogènes (Excel, JSONL.gz sur S3), avec transformation, contrôle qualité, et déploiement d’une stack minimaliste sur **AWS** (EC2, CloudWatch, S3, ECR).
@@ -119,5 +115,3 @@ Le flux amont peut être alimenté par **Airbyte** pour extraire les sources mé
 * Schéma JSON formel pour `weather`.
 * Dockerisation complète côté EC2 avec ECR.
 * Dashboard CloudWatch des métriques ETL/Mongo.
-
----
